@@ -21,6 +21,7 @@ Damit beide die Arbeit des anderen erkennen, gilt ab V1.87:
 
 ## Verlauf
 
+- **V1.98 [Grok-Bot]** – Katalog-Pflege: Kapitel von #36 aus `texte/36.txt` abgeleitet, jetzt „Kap. 10.3“ (vorher vorläufig „10.2 ff.“), `lesungen.js`. In `katalog.txt` Zeitraum bis 04.10.2026 (Live-Aufnahme #37) und Titelbild `@yt: 37 ygzD2zrn4YE` vorab eingetragen; die MP3 von #37 liegt noch nicht in Dropbox.
 - **V1.97 [Grok-Bot]** – Nur noch ein AutoStart-Schalter: Der ältere Schalter aus `feedback.js` (`#btnAuto`) ist per CSS in `index.html` ausgeblendet. Seine Logik (Start beim ersten Tippen, wenn der Browser Autoplay blockiert) liest weiter `tvp-autostart`; `auto-start.js` hält diesen Wert jetzt gleich mit dem sichtbaren Schalter.
 - **V1.96 [Grok-Bot]** – AutoStart: Nach dem Hochscrollen des Buchbilds scrollt die Seite weich weiter, bis der aktuelle Vortrag in der Liste direkt unter dem Player steht (`auto-start.js`). Scrollt man selbst, unterbleibt das.
 - **V1.95 [Grok-Bot]** – Wächter gegen Aussetzer mitten im Vortrag (neue Datei `watchdog.js`, nach `app.js` geladen): prüft alle 3 s; steht die Zeit 15 s still, obwohl der Ton laufen soll, wird die Quelle neu geladen und an derselben Stelle weitergespielt. Stoppt der Player unerwartet (nicht per Pause-Taste), wird alle 4 s neu gestartet statt nur einmal. Hat `app.js` nach 3 Fehlversuchen aufgegeben, versucht der Wächter es mit wachsendem Abstand (8–30 s) bis zu 12 Mal. Während „Vorlesen“ (Sprachausgabe aktiv) greift der Wächter nicht. Der Startablauf ist unverändert.
