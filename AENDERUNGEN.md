@@ -21,6 +21,7 @@ Damit beide die Arbeit des anderen erkennen, gilt ab V1.87:
 
 ## Verlauf
 
+- **V1.99 [Grok-Bot]** – Katalog-Pflege: Vortrag #37 (MP3 jetzt in Dropbox) als Dateizeile in `katalog.txt` und in `lesungen.js` ergänzt, Kapitel aus `texte/37.txt`: „Kap. 10.4–10.4.3“ (Erlangung von Bhakti).
 - **V1.98 [Grok-Bot]** – Katalog-Pflege: Kapitel von #36 aus `texte/36.txt` abgeleitet, jetzt „Kap. 10.3“ (vorher vorläufig „10.2 ff.“), `lesungen.js`. In `katalog.txt` Zeitraum bis 04.10.2026 (Live-Aufnahme #37) und Titelbild `@yt: 37 ygzD2zrn4YE` vorab eingetragen; die MP3 von #37 liegt noch nicht in Dropbox.
 - **V1.97 [Grok-Bot]** – Nur noch ein AutoStart-Schalter: Der ältere Schalter aus `feedback.js` (`#btnAuto`) ist per CSS in `index.html` ausgeblendet. Seine Logik (Start beim ersten Tippen, wenn der Browser Autoplay blockiert) liest weiter `tvp-autostart`; `auto-start.js` hält diesen Wert jetzt gleich mit dem sichtbaren Schalter.
 - **V1.96 [Grok-Bot]** – AutoStart: Nach dem Hochscrollen des Buchbilds scrollt die Seite weich weiter, bis der aktuelle Vortrag in der Liste direkt unter dem Player steht (`auto-start.js`). Scrollt man selbst, unterbleibt das.

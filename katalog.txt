@@ -9,6 +9,7 @@
 @yt: 36 wobhNn2LqiY
 # [Grok-Bot] Katalog-Pflege 05.10.2026: #37 live am 04.10.2026, Titelbild vorab eingetragen (MP3 folgt in Dropbox).
 @yt: 37 ygzD2zrn4YE
+# [Grok-Bot] V1.99: MP3 #37 in Dropbox, Dateizeile ergänzt.
 Tādātmya Vedānta - Einführung Teil 1.mp3
 Tādātmya Vedānta - Einführung Teil 2.mp3
 Tādātmya Vedānta - Vortrag #1 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
@@ -48,6 +49,7 @@ Tādātmya Vedānta - Vortrag #33 zum Buch über die Philosophie der Hari Bhakta
 Tādātmya Vedānta - Vortrag #34 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
 Tādātmya Vedānta - Vortrag #35 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
 Tādātmya Vedānta - Vortrag #36 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
+Tādātmya Vedānta - Vortrag #37 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
 Tādātmya Vedānta - A Siddhanta for Modern Times (Swami Revatikaanta & Mayuran).mp3
 Tādātmya Vedānta - Thinking Bhakti EP27 Series 1of3 - The Sampradaya Game (Swami Revatikaanta).mp3
 Tādātmya Vedānta - Thinking Bhakti EP28 Series 2of3 - Vedanta of Paramahamsa Vishwananda (Swami Revatikaanta).mp3
