@@ -316,7 +316,7 @@ function ensureStats(){
   });
 }
 const FB_REMOTE="feedbacks.json";
-const FB_FALLBACK="https://raw.githubusercontent.com/clbuerger-ctrl/tadatmya-vedanta-player/main/feedbacks.json";
+const FB_FALLBACK="https://raw.githubusercontent.com/BhaktiServices/tadatmya-vedanta-player/main/feedbacks.json"; /* [Grok-Bot] Umzug BhaktiServices */
 const FB_LOCAL="tv-player-feedbacks-v1";
 let fbSum=0;
 function fbLoadLocal(){try{return JSON.parse(localStorage.getItem(FB_LOCAL)||"[]");}catch(e){return [];}}
