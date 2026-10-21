@@ -68,47 +68,64 @@
   /* Schätzung „noch benötigt“: 40k ≈ 18 MB/h; ohne Dauer 18 MB pro Vortrag */
   function estimate(L){ return 18*1048576; }
   var status="";
+  /* [Grok-Bot] V2.01: Häkchen pro Vortrag (an = speichern/gespeichert, ab = löschen), Warteschlange, Auswahl-Speicherbedarf */
+  var queue=[], cur=null;
+  function wanted(f){ return !!idx()[f]||queue.indexOf(f)>=0||cur===f; }
   function render(){
     var box=document.getElementById("offList"); if(!box) return;
-    var o=idx(), used=0, need=0, n=0;
+    var o=idx(), used=0, need=0, n=0, sel=0;
     var ls=lectures();
     box.innerHTML="";
     ls.forEach(function(L){
-      var has=!!o[L.file]; if(has){used+=o[L.file].size||0;n++;} else need+=estimate(L);
-      var row=document.createElement("div"); row.className="off-row";
+      var has=!!o[L.file], w=wanted(L.file);
+      if(has){used+=o[L.file].size||0;n++;} else if(w) need+=estimate(L);
+      if(w) sel++;
+      var row=document.createElement("label"); row.className="off-row";
+      var cb=document.createElement("input"); cb.type="checkbox"; cb.className="off-cb"; cb.checked=w;
+      cb.title=has?"Offline gespeichert – abhaken zum Löschen":(cur===L.file?"Wird gerade geladen – abhaken zum Abbrechen":(w?"Wartet auf Download – abhaken zum Abbrechen":"Anhaken zum Offline-Speichern"));
+      cb.setAttribute("aria-label",cb.title);
+      cb.onchange=function(){ toggleOne(L.file,cb.checked,cb); };
       var lab=document.createElement("span"); lab.className="off-lab";
       lab.textContent=(typeof labelOf==="function"?labelOf(L):L.file).replace(/<[^>]*>/g,"");
-      if(has){ var m=document.createElement("span"); m.className="offmark"; m.textContent="offline · "+mb(o[L.file].size)+(o[L.file].q==="40"?"":" (Original)"); lab.appendChild(document.createTextNode(" ")); lab.appendChild(m); }
-      var b=document.createElement("button"); b.type="button";
-      b.textContent=has?"Löschen":"Speichern"; if(has) b.className="gold";
-      b.disabled=busy;
-      b.onclick=function(){ if(has) remove(L.file); else runQueue([L.file]); };
-      row.appendChild(lab); row.appendChild(b); box.appendChild(row);
+      var m=document.createElement("span"); m.className="offmark";
+      if(has){ m.textContent="offline · "+mb(o[L.file].size)+(o[L.file].q==="40"?"":" (Original)"); }
+      else if(cur===L.file){ m.textContent="lädt …"; m.className="offmark off-wait"; }
+      else if(w){ m.textContent="wartet"; m.className="offmark off-wait"; }
+      if(m.textContent){ lab.appendChild(document.createTextNode(" ")); lab.appendChild(m); }
+      row.appendChild(cb); row.appendChild(lab); box.appendChild(row);
     });
     var s=document.getElementById("offSum");
-    if(s) s.textContent="Offline: "+n+" von "+ls.length+" · belegt "+mb(used)+" · für den Rest noch ca. "+mb(need)+(status?" · "+status:"");
-    var ba=document.getElementById("offAll"); if(ba){ ba.disabled=false; ba.textContent=busy?"Abbrechen":"Alle speichern"; }
+    if(s) s.textContent="Offline: "+n+" von "+ls.length+" · belegt "+mb(used)+(status?" · "+status:"");
+    var se=document.getElementById("offSel");
+    if(se) se.textContent="Auswahl: "+sel+" Vorträge · braucht ca. "+mb(used+need)+" (belegt "+mb(used)+" + noch zu laden ca. "+mb(need)+")";
     if(navigator.storage&&navigator.storage.estimate){ navigator.storage.estimate().then(function(e){ var q=document.getElementById("offQuota"); if(q&&e.quota) q.textContent="Gerätespeicher frei für den Player: ca. "+mb(Math.max(0,e.quota-e.usage)); }).catch(function(){}); }
   }
-  function runQueue(files){
-    if(busy) return; busy=true; stopAll=false;
-    try{ if(navigator.storage&&navigator.storage.persist) navigator.storage.persist(); }catch(e){}
-    var k=0;
-    function nextOne(){
-      if(stopAll||k>=files.length){ busy=false; status=stopAll?"abgebrochen":(files.length?"fertig":""); redraw(); return; }
-      var f=files[k++];
-      status="lade "+k+"/"+files.length+" …"; render();
-      var bar=document.getElementById("offBar");
-      save(f,function(g,t){ var p=t?Math.round(g*100/t):0; status="lade "+k+"/"+files.length+": "+(t?p+" %":mb(g)); if(bar) bar.value=t?p:0; var s=document.getElementById("offSum"); if(s) s.textContent=s.textContent.replace(/ · lade .*$/,"")+" · "+status; })
-        .then(function(){ redraw(); },function(e){ status="Fehler: "+e.message; })
-        .then(nextOne);
+  function toggleOne(f,on,cb){
+    if(on){ if(!idx()[f]&&queue.indexOf(f)<0&&cur!==f){ queue.push(f); pump(); } render(); return; }
+    var qi=queue.indexOf(f); if(qi>=0){ queue.splice(qi,1); render(); return; }
+    if(cur===f){ stopAll=true; render(); return; }
+    if(idx()[f]){
+      if(!confirm("Diesen Vortrag aus dem Offline-Speicher löschen?")){ if(cb) cb.checked=true; return; }
+      remove(f);
     }
-    render(); nextOne();
   }
+  function pump(){
+    if(busy) return;
+    var f=queue.shift(); if(!f){ status=""; render(); return; }
+    busy=true; stopAll=false; cur=f;
+    try{ if(navigator.storage&&navigator.storage.persist) navigator.storage.persist(); }catch(e){}
+    var bar=document.getElementById("offBar");
+    status="lade … ("+(queue.length+1)+" offen)"; render();
+    save(f,function(g,t){ var p=t?Math.round(g*100/t):0; if(bar) bar.value=t?p:0; var s=document.getElementById("offSum"); if(s) s.textContent=s.textContent.replace(/ · lade .*$/,"")+" · lade "+(t?p+" %":mb(g))+" ("+(queue.length+1)+" offen)"; })
+      .then(function(){ status=queue.length?"":"fertig"; },function(e){ status=stopAll?"abgebrochen":"Fehler: "+e.message; })
+      .then(function(){ busy=false; cur=null; if(bar) bar.value=0; redraw(); pump(); });
+  }
+  function runQueue(files){ files.forEach(function(f){ if(queue.indexOf(f)<0&&cur!==f&&!idx()[f]) queue.push(f); }); pump(); render(); }
   function build(){
     var css=document.createElement("style");
     css.textContent=".offmark{color:#1a1410;background:var(--gold);border-radius:4px;padding:0 .35em;font-size:.75em;margin-left:.3em}"+
       "#offDlg .off-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #3a2e26}#offDlg .off-lab{flex:1;font-size:.9rem}"+
+      "#offDlg .off-cb{width:22px;height:22px;accent-color:var(--gold);flex:0 0 auto;cursor:pointer}#offDlg .off-row{cursor:pointer}#offDlg .off-wait{background:#5a4634;color:var(--text)}"+
       "#offDlg progress{width:100%;height:10px}#offDlg .off-sum{padding:0 12px;font-size:.85rem;color:var(--muted)}";
     document.head.appendChild(css);
     var row=document.querySelector("#btnVolNorm"); row=row&&row.parentNode;
@@ -128,18 +145,19 @@
     }
     var d=document.createElement("div"); d.className="overlay"; d.id="offDlg";
     d.innerHTML='<div class="panel"><div class="dlghead"><h3>Offline speichern</h3><button type="button" class="gold btnCloseTop" id="offClose">Schließen</button></div>'+
-      '<p class="off-sum" id="offSum"></p><p class="off-sum" id="offQuota"></p><div style="padding:0 12px"><progress id="offBar" max="100" value="0"></progress></div>'+
+      '<div class="dlgfoot" style="display:flex;gap:8px;padding-top:0"><button type="button" class="gold" id="offAll" style="flex:1">Alle anhaken</button><button type="button" id="offDel" style="flex:1">Alle abhaken</button></div><p class="off-sum" id="offSum"></p><p class="off-sum" id="offSel" style="color:var(--gold)"></p><p class="off-sum" id="offQuota"></p><div style="padding:0 12px"><progress id="offBar" max="100" value="0"></progress></div>'+
       '<div class="dlgbody" id="offList" style="white-space:normal"></div>'+
-      '<div class="dlgfoot" style="display:flex;gap:8px"><button type="button" class="gold" id="offAll" style="flex:1">Alle speichern</button><button type="button" id="offDel" style="flex:1">Alle löschen</button></div></div>';
+      '</div>';
     document.body.appendChild(d);
     function close(){ d.classList.remove("on"); }
     document.getElementById("offClose").onclick=close;
     d.addEventListener("click",function(e){ if(e.target===d) close(); });
-    document.getElementById("offAll").onclick=function(){
-      if(busy){ stopAll=true; return; }
-      var o=idx(); runQueue(lectures().map(function(L){return L.file;}).filter(function(f){return !o[f];}));
+    document.getElementById("offAll").onclick=function(){ runQueue(lectures().map(function(L){return L.file;})); };
+    document.getElementById("offDel").onclick=function(){
+      var any=Object.keys(idx()).length;
+      if(any&&!confirm("Alle Häkchen entfernen und alle offline gespeicherten Vorträge löschen?")) return;
+      queue=[]; if(busy) stopAll=true; removeAll();
     };
-    document.getElementById("offDel").onclick=function(){ if(confirm("Alle offline gespeicherten Vorträge löschen?")) removeAll(); };
   }
   /* Markierung „offline“ in der Liste: list-marks.js zeichnet die Liste selbst, daher hier nachträglich ergänzen */
   function markList(){

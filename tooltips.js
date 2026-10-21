@@ -17,8 +17,8 @@
     notesBookmark:"Lesezeichen an dieser Stelle setzen (2,5 s früher)", notesClear:"Notiz löschen",
     notesBmPrev:"Zum vorherigen Lesezeichen", notesBmNext:"Zum nächsten Lesezeichen",
     notesHwPen:"Stift", notesHwEraser:"Radierer", notesHwClear:"Handschrift leeren", notesHwSave:"Handschrift speichern",
-    offClose:"Schließen", offDel:"Alle offline gespeicherten Vorträge löschen",
-    offAll:function(b){ return /Abbrechen/.test(txt(b))?"Speichern abbrechen":"Alle Vorträge offline speichern"; },
+    offClose:"Schließen", offDel:"Alle abhaken: Downloads abbrechen und alle Offline-Kopien löschen",
+    offAll:"Alle anhaken: alle Vorträge offline speichern",
     btnAuto:"AutoStart"
   };
   var BY_CLICK={"prev()":"Vorheriger Vortrag","next()":"Nächster Vortrag","showSum()":"Excerpt (Begleittext) anzeigen","hideSum()":"Schließen","hideNotes()":"Schließen","toggle()":"Abspielen / Pause"};
