@@ -1,3 +1,4 @@
+/* [Grok-Bot] V2.00 Cache + offline.js; Audio-Cache tvp-audio-v1 bleibt beim Aktivieren erhalten; Shell-Treffer ohne ?v= */
 /* [Grok-Bot] V1.98 Cache */
 /* [Grok-Bot] V1.97 Cache */
 /* [Grok-Bot] V1.96 Cache */
@@ -7,7 +8,8 @@
 /* [Grok.com] V1.92 Cache */
 /* [Grok-Bot] V1.91 Cache */
 /* TV Player — shell only; never cache Dropbox audio; never serve HTML as JS */
-const CACHE="tv-player-v199"; /* [Grok-Bot] V1.99 */
+const CACHE="tv-player-v200"; /* [Grok-Bot] V2.00 */
+const AUDIO_CACHE="tvp-audio-v1"; /* [Grok-Bot] V2.00: offline gespeicherte Vorträge (offline.js) */
 const SHELL=[
   "./",
   "index.html",
@@ -24,6 +26,15 @@ const SHELL=[
   "auto-start.js",
   "live.js",
   "notes.js",
+  "offline.js",
+  "dlmap.js",
+  "thumbs.js",
+  "resume-fix.js",
+  "thumb-overlay.js",
+  "vol-norm.js",
+  "excerpt-format.js",
+  "excerpt-tts.js",
+  "katalog.txt",
   "cover.jpg",
   "manifest.webmanifest",
   "sw.js"
@@ -38,7 +49,7 @@ self.addEventListener("install",function(e){
 });
 self.addEventListener("activate",function(e){
   e.waitUntil(caches.keys().then(function(keys){
-    return Promise.all(keys.filter(function(k){ return k!==CACHE; }).map(function(k){ return caches.delete(k); }));
+    return Promise.all(keys.filter(function(k){ return k!==CACHE && k!==AUDIO_CACHE; }).map(function(k){ return caches.delete(k); }));
   }).then(function(){ return self.clients.claim(); }));
 });
 self.addEventListener("fetch",function(e){
@@ -53,7 +64,7 @@ self.addEventListener("fetch",function(e){
       }
       return res;
     }).catch(function(){
-      return caches.match(e.request).then(function(hit){
+      return caches.match(e.request,{ignoreSearch:true}).then(function(hit){ /* [Grok-Bot] V2.00 */
         if(hit) return hit;
         if(isAssetRequest(e.request)) return Response.error();
         return caches.match("index.html");

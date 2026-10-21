@@ -5,7 +5,26 @@ const POS_STORE="tv-player-positions-v2";
 const DONE_STORE="tv-player-done-v1";
 const TEXT_BASE="texte/";
 const LESUNGEN=(window.LESUNGEN||[]).map(function(L){ L.sum=L.sum||""; return L; });
-function mediaUrl(name,bust){return FOLDER+"?rlkey="+encodeURIComponent(RLKEY)+"&preview="+encodeURIComponent(name)+"&raw=1"+(bust?"&_="+Date.now():"");}
+/* [Grok-Bot] V2.00: sparsame 40k-Audios (40 kbit/s mono, gleiche Dateinamen im Dropbox-Unterordner 40k) */
+const FOLDER40="https://www.dropbox.com/scl/fo/q5goztqfewubv1phqs332/AOcvsc00TiAtlTlhlhGskHc";
+const RLKEY40="n6zhmkp4van54dpbk4mnmx21c";
+const SAVE_KEY="tvp-datasave-v1";
+const fb40={}; /* Dateien, bei denen 40k in dieser Sitzung scheiterte -> Original */
+function mediaUrlOrig(name,bust){return FOLDER+"?rlkey="+encodeURIComponent(RLKEY)+"&preview="+encodeURIComponent(name)+"&raw=1"+(bust?"&_="+Date.now():"");}
+function mediaUrl40(name,bust){return FOLDER40+"?rlkey="+encodeURIComponent(RLKEY40)+"&preview="+encodeURIComponent(name)+"&raw=1"+(bust?"&_="+Date.now():"");}
+function dataSaveOn(){try{return localStorage.getItem(SAVE_KEY)!=="0";}catch(e){return true;}}
+/* Quelle wählen: offline (Blob) > 40k (Datensparen an) > Original. Merkt die Art in a.dataset.q */
+function mediaUrl(name,bust){
+  if(!/\.mp3$/i.test(name||"")) return mediaUrlOrig(name,bust);
+  let q="orig", u;
+  const off=window.tvpOfflineUrl&&window.tvpOfflineUrl(name);
+  if(off){ q="off"; u=off; }
+  else if(dataSaveOn()&&!fb40[name]){ q="40"; u=mediaUrl40(name,bust); }
+  else u=mediaUrlOrig(name,bust);
+  try{ const el=document.getElementById("a"); if(el){ el.dataset.q=q; el.dataset.qfile=name; } }catch(e){}
+  return u;
+}
+window.mediaUrl40=mediaUrl40; window.mediaUrlOrig=mediaUrlOrig;
 const textCache={};
 function loadPositions(){
   try{
@@ -170,6 +189,7 @@ function zeichne(){
     let mark="";
     if(done) mark+=" <span class=\"done\" title=\"angehört\">✓</span>";
     if(pos>3) mark+=" · weiter bei "+fmt(pos);
+    if(window.tvpOfflineHas&&window.tvpOfflineHas(L.file)) mark+=" <span class=\"offmark\" title=\"offline gespeichert\">offline</span>"; /* [Grok-Bot] V2.00 */
     d.innerHTML=labelOf(L)+mark+"<div class='tags'>"+(L.tags||[]).join(" ")+"</div>";
     box.appendChild(d);
   });
@@ -453,7 +473,17 @@ a.addEventListener("ended",function(){
   if(doneFile) markDone(doneFile);
   zeichne();
 });
-a.addEventListener("error",function(){started=false;syncSkipBtns();recoverPlayback("error");});
+a.addEventListener("error",function(){
+  started=false;syncSkipBtns();
+  /* [Grok-Bot] V2.00: Fehler bei 40k oder Offline-Kopie -> sofort auf nächste Quelle (Original) zurückfallen */
+  const q=a.dataset.q, f=a.dataset.qfile;
+  if(f&&(q==="40"||q==="off")){
+    if(q==="off"&&window.tvpOfflineBad) window.tvpOfflineBad(f);
+    if(q==="40") fb40[f]=1;
+    recoverTries=0; recoverDebounceUntil=0;
+  }
+  recoverPlayback("error");
+});
 a.addEventListener("stalled",function(){
   if(recoverStallTimer) clearTimeout(recoverStallTimer);
   recoverStallTimer=setTimeout(function(){

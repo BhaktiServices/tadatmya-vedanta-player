@@ -7,7 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Tadatmya Vedanta Player V1.99</title>
+<title>Tadatmya Vedanta Player V2.00</title>
+<!-- [Grok-Bot] V2.00: Datensparen (40k-Audios mit Rückfall aufs Original) und Offline-Modus (offline.js) -->
 <!-- [Grok-Bot] V1.99: Vortrag #37 im Katalog (katalog.txt, lesungen.js) -->
 <!-- [Grok-Bot] V1.98: Kapitel #36 = Kap. 10.3 (lesungen.js) -->
 <!-- [Grok-Bot] V1.97: nur noch ein AutoStart-Schalter (alter #btnAuto aus feedback.js ausgeblendet) -->
@@ -116,7 +117,7 @@ button.item.active{background:#4a372b;color:var(--gold)}
 </head>
 <body>
 <header>
-  <h1>Tadatmya Vedanta Player <span class="ver">V1.99</span></h1>
+  <h1>Tadatmya Vedanta Player <span class="ver">V2.00</span></h1>
   <h2>Sammlung der veröffentlichten Sonntags-Vorträge von Rishi Sahadev (<a href="https://t.me/+7qSv0wH6VkE0Njky" target="_blank" rel="noopener">Telegram</a>) und eine Auswahl verschiedener Satsangs von Swami Revatikaanta und Pandit Mayuran zu diesem wichtigen Thema</h2>
   <div class="meta" id="zeitraum">Zeitraum: 13.12.2025 – 04.10.2026</div>
   <div class="cover-gap" aria-hidden="true"></div>
@@ -223,7 +224,7 @@ button.item.active{background:#4a372b;color:var(--gold)}
 <script src="lesungen.js?v=199"></script>
 <script src="zeitraum.js?v=187"></script>
 <script src="thumbs.js?v=188"></script>
-<script src="app.js?v=191"></script>
+<script src="app.js?v=200"></script>
 <script src="watchdog.js?v=195"></script>
 <script src="katalog.js?v=188"></script>
 <script src="list-marks.js?v=184"></script>
@@ -261,6 +262,7 @@ button.item.active{background:#4a372b;color:var(--gold)}
 <script src="auto-start.js?v=197"></script>
 <script src="live.js?v=184"></script>
 <script src="notes.js?v=194"></script>
+<script src="dlmap.js?v=200"></script><script src="offline.js?v=200"></script><!-- [Grok-Bot] V2.00 -->
 <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){})</script>
 </body>
 </html>
