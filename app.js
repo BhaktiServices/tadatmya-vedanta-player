@@ -189,7 +189,6 @@ function zeichne(){
     let mark="";
     if(done) mark+=" <span class=\"done\" title=\"angehört\">✓</span>";
     if(pos>3) mark+=" · weiter bei "+fmt(pos);
-    if(window.tvpOfflineHas&&window.tvpOfflineHas(L.file)) mark+=" <span class=\"offmark\" title=\"offline gespeichert\">offline</span>"; /* [Grok-Bot] V2.00 */
     d.innerHTML=labelOf(L)+mark+"<div class='tags'>"+(L.tags||[]).join(" ")+"</div>";
     box.appendChild(d);
   });

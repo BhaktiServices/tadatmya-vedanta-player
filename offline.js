@@ -141,8 +141,22 @@
     };
     document.getElementById("offDel").onclick=function(){ if(confirm("Alle offline gespeicherten Vorträge löschen?")) removeAll(); };
   }
+  /* Markierung „offline“ in der Liste: list-marks.js zeichnet die Liste selbst, daher hier nachträglich ergänzen */
+  function markList(){
+    var o=idx(); if(typeof sichtbar==="undefined") return;
+    document.querySelectorAll("#list .item[data-idx]").forEach(function(d){
+      var L=sichtbar[+d.getAttribute("data-idx")]; if(!L||!o[L.file]||d.querySelector(".offmark")) return;
+      var m=document.createElement("span"); m.className="offmark"; m.title="offline gespeichert"; m.textContent="offline";
+      (d.querySelector(".ttl")||d).appendChild(m);
+    });
+  }
+  function hook(){
+    if(typeof window.zeichne!=="function"||window.zeichne.__off) return;
+    var orig=window.zeichne, w=function(){ var r=orig.apply(this,arguments); markList(); return r; };
+    w.__off=1; window.zeichne=w; try{ zeichne=w; }catch(e){}
+  }
   function init(){
-    build();
+    build(); hook(); setTimeout(function(){hook();markList();},1500);
     var o=idx();
     Promise.all(Object.keys(o).map(function(f){return loadUrl(f).catch(function(){});})).then(redraw);
     if(Object.keys(o).length){ try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch(e){} }
