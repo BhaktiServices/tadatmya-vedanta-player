@@ -646,7 +646,11 @@
     var ers = $("notesHwEraser");
     var clr = $("notesHwClear");
     var sav = $("notesHwSave");
-    if (pen) pen.addEventListener("click", function (e) { e.preventDefault(); setHwTool("pen"); });
+    if (pen) pen.addEventListener("click", function (e) { e.preventDefault(); setHwTool("pen");
+      /* [Grok-Bot] V2.02: Stift holt das Pad ganz in den sichtbaren Bereich (vorher oft verdeckt/abgeschnitten) */
+      var sc2 = hwScroll(), bd = sc2 && sc2.closest(".dlgbody");
+      if (bd) { var d = sc2.getBoundingClientRect().bottom - bd.getBoundingClientRect().bottom; if (d > 0) bd.scrollTop += d + 4; }
+      ensureHwReady(); setStatus("Stift aktiv – im Feld unten schreiben"); });
     if (ers) ers.addEventListener("click", function (e) { e.preventDefault(); setHwTool("eraser"); });
     if (clr) clr.addEventListener("click", function (e) { e.preventDefault(); clearHwPad(); });
     if (sav) sav.addEventListener("click", function (e) { e.preventDefault(); saveHwDrawing(); });

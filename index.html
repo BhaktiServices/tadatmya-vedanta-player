@@ -7,7 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Tadatmya Vedanta Player V2.01</title>
+<title>Tadatmya Vedanta Player V2.02</title>
+<!-- [Grok-Bot] V2.02: Notizen – Stift holt das Handschrift-Pad in Sicht, Notizfeld auf kleinen Bildschirmen kleiner -->
 <!-- [Grok-Bot] V2.01: nur noch ein Play-Knopf (Nummernfeld startet per Enter), Hovertexte für alle Knöpfe (tooltips.js) -->
 <!-- [Grok-Bot] V2.00: Datensparen (40k-Audios mit Rückfall aufs Original) und Offline-Modus (offline.js) -->
 <!-- [Grok-Bot] V1.99: Vortrag #37 im Katalog (katalog.txt, lesungen.js) -->
@@ -107,6 +108,8 @@ button.item.active{background:#4a372b;color:var(--gold)}
 .notes-hw-tools button{min-height:36px}
 .notes-hw-scroll{width:100%;max-height:320px;overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid #5a4634;border-radius:8px;background:#1a1410;touch-action:pan-y}
 #notesHwCanvas{display:block;width:100%;height:300px;touch-action:none;cursor:crosshair;background:#1a1410}
+/* [Grok-Bot] V2.02: auf kleinen/niedrigen Bildschirmen Notizfeld kleiner, damit das Handschrift-Pad Platz hat */
+@media (max-height:900px),(max-width:700px){#notesEditor{min-height:6rem;max-height:24vh}#notesDlg .dlgbody{max-height:none!important}}
 .bm-track-wrap{padding:0 12px 2px;margin-top:-2px}
 #bmTrack{position:relative;height:14px;margin:0 0 2px;display:none}
 .bm-mark{position:absolute;top:0;width:10px;height:14px;margin-left:-5px;padding:0;border:none;border-radius:2px;background:var(--gold);cursor:pointer;opacity:.85;min-height:0;z-index:2}
@@ -118,7 +121,7 @@ button.item.active{background:#4a372b;color:var(--gold)}
 </head>
 <body>
 <header>
-  <h1>Tadatmya Vedanta Player <span class="ver">V2.01</span></h1>
+  <h1>Tadatmya Vedanta Player <span class="ver">V2.02</span></h1>
   <h2>Sammlung der veröffentlichten Sonntags-Vorträge von Rishi Sahadev (<a href="https://t.me/+7qSv0wH6VkE0Njky" target="_blank" rel="noopener">Telegram</a>) und eine Auswahl verschiedener Satsangs von Swami Revatikaanta und Pandit Mayuran zu diesem wichtigen Thema</h2>
   <div class="meta" id="zeitraum">Zeitraum: 13.12.2025 – 04.10.2026</div>
   <div class="cover-gap" aria-hidden="true"></div>
@@ -262,7 +265,7 @@ button.item.active{background:#4a372b;color:var(--gold)}
 <script src="cover-fx.js?v=192"></script>
 <script src="auto-start.js?v=197"></script>
 <script src="live.js?v=184"></script>
-<script src="notes.js?v=194"></script>
+<script src="notes.js?v=202"></script>
 <script src="dlmap.js?v=200"></script><script src="offline.js?v=201"></script>
 <script src="tooltips.js?v=2011"></script><!-- [Grok-Bot] V2.01 --><!-- [Grok-Bot] V2.00 -->
 <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){})</script>
