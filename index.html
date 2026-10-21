@@ -7,7 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Tadatmya Vedanta Player V2.00</title>
+<title>Tadatmya Vedanta Player V2.01</title>
+<!-- [Grok-Bot] V2.01: nur noch ein Play-Knopf (Nummernfeld startet per Enter), Hovertexte für alle Knöpfe (tooltips.js) -->
 <!-- [Grok-Bot] V2.00: Datensparen (40k-Audios mit Rückfall aufs Original) und Offline-Modus (offline.js) -->
 <!-- [Grok-Bot] V1.99: Vortrag #37 im Katalog (katalog.txt, lesungen.js) -->
 <!-- [Grok-Bot] V1.98: Kapitel #36 = Kap. 10.3 (lesungen.js) -->
@@ -117,7 +118,7 @@ button.item.active{background:#4a372b;color:var(--gold)}
 </head>
 <body>
 <header>
-  <h1>Tadatmya Vedanta Player <span class="ver">V2.00</span></h1>
+  <h1>Tadatmya Vedanta Player <span class="ver">V2.01</span></h1>
   <h2>Sammlung der veröffentlichten Sonntags-Vorträge von Rishi Sahadev (<a href="https://t.me/+7qSv0wH6VkE0Njky" target="_blank" rel="noopener">Telegram</a>) und eine Auswahl verschiedener Satsangs von Swami Revatikaanta und Pandit Mayuran zu diesem wichtigen Thema</h2>
   <div class="meta" id="zeitraum">Zeitraum: 13.12.2025 – 04.10.2026</div>
   <div class="cover-gap" aria-hidden="true"></div>
@@ -142,8 +143,8 @@ button.item.active{background:#4a372b;color:var(--gold)}
   <div class="row"><input id="q" type="search" placeholder="Suche #Hashtag oder Wort" oninput="filterList()"></div>
   <div class="row">
     <label>#</label>
-    <input id="nr" type="number" min="1" max="99" inputmode="numeric" placeholder="23">
-    <button class="gold" type="button" onclick="playNr()">Play</button>
+    <!-- [Grok-Bot] V2.01: zweiter „Play“-Knopf (playNr) entfernt; Nummer + Enter/OK spielt ab -->
+    <input id="nr" type="number" min="1" max="99" inputmode="numeric" enterkeyhint="go" placeholder="23" onkeydown="if(event.key==='Enter'){event.preventDefault();playNr();}">
     <button class="gold" type="button" id="btnResume" onclick="resumeNow()">Weiterhören</button>
     <button type="button" id="btnAutoStart" aria-pressed="true">AutoStart an</button>
     <button type="button" onclick="showSum()">Excerpt</button>
@@ -262,7 +263,8 @@ button.item.active{background:#4a372b;color:var(--gold)}
 <script src="auto-start.js?v=197"></script>
 <script src="live.js?v=184"></script>
 <script src="notes.js?v=194"></script>
-<script src="dlmap.js?v=200"></script><script src="offline.js?v=2001"></script><!-- [Grok-Bot] V2.00 -->
+<script src="dlmap.js?v=200"></script><script src="offline.js?v=2001"></script>
+<script src="tooltips.js?v=201"></script><!-- [Grok-Bot] V2.01 --><!-- [Grok-Bot] V2.00 -->
 <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){})</script>
 </body>
 </html>

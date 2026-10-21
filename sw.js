@@ -1,3 +1,4 @@
+/* [Grok-Bot] V2.01 Cache + tooltips.js */
 /* [Grok-Bot] V2.00 Cache + offline.js; Audio-Cache tvp-audio-v1 bleibt beim Aktivieren erhalten; Shell-Treffer ohne ?v= */
 /* [Grok-Bot] V1.98 Cache */
 /* [Grok-Bot] V1.97 Cache */
@@ -8,7 +9,7 @@
 /* [Grok.com] V1.92 Cache */
 /* [Grok-Bot] V1.91 Cache */
 /* TV Player — shell only; never cache Dropbox audio; never serve HTML as JS */
-const CACHE="tv-player-v200"; /* [Grok-Bot] V2.00 */
+const CACHE="tv-player-v201"; /* [Grok-Bot] V2.01 */
 const AUDIO_CACHE="tvp-audio-v1"; /* [Grok-Bot] V2.00: offline gespeicherte Vorträge (offline.js) */
 const SHELL=[
   "./",
@@ -28,6 +29,7 @@ const SHELL=[
   "notes.js",
   "offline.js",
   "dlmap.js",
+  "tooltips.js",
   "thumbs.js",
   "resume-fix.js",
   "thumb-overlay.js",
