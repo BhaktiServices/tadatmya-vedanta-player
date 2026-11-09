@@ -45,7 +45,8 @@ window.TVP_DL={
 "Tādātmya Vedānta - Vortrag #36 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "ABrOsfJwjlrWlUY_FXTGAeU",
 "Tādātmya Vedānta - Vortrag #37 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "AFo0xYCSKd4zdACDWdgl3Xg",
 "Tādātmya Vedānta - Vortrag #38 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "AAQSzm02cKWQBVf-6y83szY", /* [Grok-Bot] V2.05 */
-"Tādātmya Vedānta - Vortrag #39 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "ACj7EB94bQPRE0HIcpkO19g" /* [Grok-Bot] V2.07 */
+"Tādātmya Vedānta - Vortrag #39 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "ACj7EB94bQPRE0HIcpkO19g", /* [Grok-Bot] V2.07 */
+"Tādātmya Vedānta - Vortrag #40 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "AC5ODBGz-pD7HmCfLaQj6PE" /* [Grok-Bot] V2.09 */
 }},
   "orig":{folder:"m10ycst2zjp72cwygc1fo",rlkey:"ubqr97xi75q2xr6d3jhf4hcyf",ids:{
 "Tādātmya Vedānta - Einführung Teil 1.mp3": "ANfxY0HPbwvFeWyXykjujjg",
@@ -90,6 +91,7 @@ window.TVP_DL={
 "Tādātmya Vedānta - Vortrag #37 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "AFdtzAnIyZMtoRbsCAmUvSw",
 "Tādātmya Vedānta - Vortrag #38 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "AFMUDL7ycPzYYVMIZF958nM", /* [Grok-Bot] V2.05 */
 "Tādātmya Vedānta - Vortrag #39 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "AOKEgpq7BenAVmMi4gYAkN4", /* [Grok-Bot] V2.07 */
+"Tādātmya Vedānta - Vortrag #40 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3": "ABOtC6DeB35iF2C4dO_ZQUc", /* [Grok-Bot] V2.09 */
 "Tādātmya Vedānta - A Siddhanta for Modern Times (Swami Revatikaanta & Mayuran).mp3": "AOfdpn6a-BQppv05-EnZSaU",
 "Tādātmya Vedānta - Thinking Bhakti EP27 Series 1of3 - The Sampradaya Game (Swami Revatikaanta).mp3": "AEeRe9CwEmj13OijZsJNZqw",
 "Tādātmya Vedānta - Thinking Bhakti EP28 Series 2of3 - Vedanta of Paramahamsa Vishwananda (Swami Revatikaanta).mp3": "AI1lV4GWfnHxPGOxG7__Xus",

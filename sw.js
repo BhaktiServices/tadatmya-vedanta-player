@@ -1,3 +1,4 @@
+/* [Grok-Bot] V2.09 Cache v209 (#40) */
 /* [Grok-Bot] V2.08 Cache v208 (#40 Titelbild) */
 /* [Grok-Bot] V2.06 Cache v206 (#39 Katalog) */
 /* [Grok-Bot] V2.05 Cache v205 (#38) */
@@ -14,7 +15,7 @@
 /* [Grok.com] V1.92 Cache */
 /* [Grok-Bot] V1.91 Cache */
 /* TV Player — shell only; never cache Dropbox audio; never serve HTML as JS */
-const CACHE="tv-player-v208"; /* [Grok-Bot] V2.08 */
+const CACHE="tv-player-v209"; /* [Grok-Bot] V2.09 */
 const AUDIO_CACHE="tvp-audio-v1"; /* [Grok-Bot] V2.00: offline gespeicherte Vorträge (offline.js) */
 const SHELL=[
   "./",

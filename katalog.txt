@@ -17,6 +17,7 @@
 @yt: 39 4y7NxnQbfns
 # [Grok-Bot] V2.08: #40 live am 08.11.2026 (YouTube release_date), Zeitraum bis 08.11.2026, Titelbild vorab eingetragen (MP3 folgt in Dropbox).
 @yt: 40 il7dTRnCcyw
+# [Grok-Bot] V2.09: MP3 #40 in Dropbox, Dateizeile ergänzt.
 # [Grok-Bot] V2.07: MP3 #39 in Dropbox, Dateizeile ergänzt.
 Tādātmya Vedānta - Einführung Teil 1.mp3
 Tādātmya Vedānta - Einführung Teil 2.mp3
@@ -60,6 +61,7 @@ Tādātmya Vedānta - Vortrag #36 zum Buch über die Philosophie der Hari Bhakta
 Tādātmya Vedānta - Vortrag #37 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
 Tādātmya Vedānta - Vortrag #38 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
 Tādātmya Vedānta - Vortrag #39 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
+Tādātmya Vedānta - Vortrag #40 zum Buch über die Philosophie der Hari Bhakta Sampradaya.mp3
 Tādātmya Vedānta - A Siddhanta for Modern Times (Swami Revatikaanta & Mayuran).mp3
 Tādātmya Vedānta - Thinking Bhakti EP27 Series 1of3 - The Sampradaya Game (Swami Revatikaanta).mp3
 Tādātmya Vedānta - Thinking Bhakti EP28 Series 2of3 - Vedanta of Paramahamsa Vishwananda (Swami Revatikaanta).mp3
