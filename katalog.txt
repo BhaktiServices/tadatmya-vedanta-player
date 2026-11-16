@@ -4,7 +4,7 @@
 # Optional mit Titel/Tags/Kapitel:  Dateiname.mp3 | Titel | #Tag1 #Tag2 | Kap. x
 # Zeilen mit # am Anfang sind Kommentare. Details: KATALOG.md
 # [Grok-Bot] V1.87: Die @zeitraum-Zeile liest der Player bei jedem Aufruf (erste bis letzte Live-Aufnahme laut YouTube).
-@zeitraum: 13.12.2025 – 08.11.2026
+@zeitraum: 13.12.2025 – 15.11.2026
 # [Grok-Bot] V1.88: "@yt: <Nr> <YouTube-ID>" = Titelbild für neue Vorträge (4 s beim Start). Ältere stehen in thumbs.js.
 @yt: 36 wobhNn2LqiY
 # [Grok-Bot] Katalog-Pflege 05.10.2026: #37 live am 04.10.2026, Titelbild vorab eingetragen (MP3 folgt in Dropbox).
@@ -17,6 +17,8 @@
 @yt: 39 4y7NxnQbfns
 # [Grok-Bot] V2.08: #40 live am 08.11.2026 (YouTube release_date), Zeitraum bis 08.11.2026, Titelbild vorab eingetragen (MP3 folgt in Dropbox).
 @yt: 40 il7dTRnCcyw
+# [Grok-Bot] V2.11: #41 live am 15.11.2026 (YouTube release_date), Zeitraum bis 15.11.2026, Titelbild vorab eingetragen (MP3 folgt in Dropbox).
+@yt: 41 2-cdEsAgvFE
 # [Grok-Bot] V2.09: MP3 #40 in Dropbox, Dateizeile ergänzt.
 # [Grok-Bot] V2.07: MP3 #39 in Dropbox, Dateizeile ergänzt.
 Tādātmya Vedānta - Einführung Teil 1.mp3
