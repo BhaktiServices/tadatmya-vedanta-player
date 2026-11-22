@@ -21,6 +21,8 @@ Damit beide die Arbeit des anderen erkennen, gilt ab V1.87:
 
 ## Verlauf
 
+- **V2.12 [Grok-Bot]** – Vortrag #41 (live 15.11.2026, YouTube `2-cdEsAgvFE`, 61:20; MP3 Original + 40k jetzt in Dropbox): Dateizeile in `katalog.txt`, Eintrag in `lesungen.js` (Kapitel/Titel **vorläufig** „Kap. 10.6.4 ff.“, „Navadhā-bhakti – weitere Formen (vorläufig)“), Download-IDs in `dlmap.js` (Original `ABopEeXt-7zJphieLKCyYu8`, 40k `APYKbK6oi_JxPid0Ory7rrk`). Telegram-Begleittext nicht verfügbar, daher kein `texte/41.txt` (wie bei #38/#39); nachtragen, sobald verfügbar. `index.html` (Version, `?v=212` für lesungen.js/dlmap.js), `sw.js` (Cache v212).
+
 - **V2.11 [Grok-Bot]** – Katalog-Pflege: Vortrag #41 war am 15.11.2026 live (YouTube `2-cdEsAgvFE`, release_date 15.11.2026, 61:20). In `katalog.txt` Zeitraum jetzt 13.12.2025 – 15.11.2026 und Titelbild `@yt: 41 2-cdEsAgvFE` vorab eingetragen; die MP3 von #41 liegt noch nicht in Dropbox (Dateizeile, Eintrag in `lesungen.js` und `dlmap.js`-IDs folgen dann). `index.html` (Version), `sw.js` (Cache v211).
 
 - **V2.10 [Grok-Bot]** – Begleittext zu Vortrag #40 aus Telegram (`texte/40.txt`, Vertiefung #40 von Hariharānanda): Kapitel und Titel in `lesungen.js` jetzt „Kap. 10.6.3–10.6.4.3“, „Ṣaḍaṅga-yoga und Navadhā-bhakti“ (vorher vorläufig „Kap. 10.4 ff.“). `texte/38.txt` und `texte/39.txt` fehlen weiterhin. `index.html` (Version, `?v=210` für lesungen.js), `sw.js` (Cache v210).
