@@ -21,6 +21,8 @@ Damit beide die Arbeit des anderen erkennen, gilt ab V1.87:
 
 ## Verlauf
 
+- **V2.13 [Grok-Bot]** – Katalog-Pflege: Vortrag #42 war am 22.11.2026 live (YouTube `tpOwPPVRwZo`, release_date 22.11.2026, 1:04:55). In `katalog.txt` Zeitraum jetzt 13.12.2025 – 22.11.2026 und Titelbild `@yt: 42 tpOwPPVRwZo` vorab eingetragen; die MP3 von #42 liegt noch nicht in Dropbox (Dateizeile, Eintrag in `lesungen.js` und `dlmap.js`-IDs folgen dann). `index.html` (Version), `sw.js` (Cache v213).
+
 - **V2.12 [Grok-Bot]** – Vortrag #41 (live 15.11.2026, YouTube `2-cdEsAgvFE`, 61:20; MP3 Original + 40k jetzt in Dropbox): Dateizeile in `katalog.txt`, Eintrag in `lesungen.js` (Kapitel/Titel **vorläufig** „Kap. 10.6.4 ff.“, „Navadhā-bhakti – weitere Formen (vorläufig)“), Download-IDs in `dlmap.js` (Original `ABopEeXt-7zJphieLKCyYu8`, 40k `APYKbK6oi_JxPid0Ory7rrk`). Telegram-Begleittext nicht verfügbar, daher kein `texte/41.txt` (wie bei #38/#39); nachtragen, sobald verfügbar. `index.html` (Version, `?v=212` für lesungen.js/dlmap.js), `sw.js` (Cache v212).
 
 - **V2.11 [Grok-Bot]** – Katalog-Pflege: Vortrag #41 war am 15.11.2026 live (YouTube `2-cdEsAgvFE`, release_date 15.11.2026, 61:20). In `katalog.txt` Zeitraum jetzt 13.12.2025 – 15.11.2026 und Titelbild `@yt: 41 2-cdEsAgvFE` vorab eingetragen; die MP3 von #41 liegt noch nicht in Dropbox (Dateizeile, Eintrag in `lesungen.js` und `dlmap.js`-IDs folgen dann). `index.html` (Version), `sw.js` (Cache v211).
