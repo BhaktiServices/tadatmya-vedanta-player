@@ -43,7 +43,10 @@ window.TV_THUMBS_FILE={
   "EP29":{yt:"p3FPW368U0M"},
   "Modern Times":{yt:"_jg8TOeeke8"},
   "Siddhanta for Modern":{yt:"_jg8TOeeke8"},
-  "Siddhānta for Modern":{yt:"_jg8TOeeke8"}
+  "Siddhānta for Modern":{yt:"_jg8TOeeke8"},
+  "Einführung Teil 1":{yt:"EZp15P27RC8"}, /* [Grok-Bot] V2.14: YouTube „Die Essenz von Tadatmya Vedanta – Teil 1“ */
+  "Einführung Teil 2":{yt:"Xc6IGitfuM4"}, /* [Grok-Bot] V2.14: YouTube „Die Essenz von Tadatmya Vedanta – Teil 2“ */
+  "EP10":{yt:"yKWcu6ML9WA"} /* [Grok-Bot] V2.14: Unity without erasing difference (Pandit Mayuran EP10) */
 };
 function tvThumbUrl(yt){
   if(!yt) return "cover.jpg";
