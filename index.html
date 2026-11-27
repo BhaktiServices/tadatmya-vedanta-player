@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Tadatmya Vedanta Player V2.15</title>
-<!-- [Grok-Bot] V2.15: ein YouTube-Button, Overlay mit Embed an der aktuellen Stelle, Offline-Hinweis -->
+<title>Tadatmya Vedanta Player V2.16</title>
+<!-- [Grok-Bot] V2.16: YouTube-Button neben „Offline“ in der Schalterzeile -->
 <!-- [Grok-Bot] V2.12: Vortrag #41 (Katalog, lesungen.js, dlmap.js-IDs; kein texte/41.txt, Telegram-Begleittext fehlt) -->
 <!-- [Grok-Bot] V2.13: Katalog-Pflege #42 (Zeitraum, Titelbild) -->
 <!-- [Grok-Bot] V2.11: Katalog-Pflege #41 (Zeitraum, Titelbild) -->
@@ -128,11 +128,10 @@ button.item.active{background:#4a372b;color:var(--gold)}
 .bm-mark:hover{opacity:1}
 /* [Grok-Bot] V1.97: doppelten AutoStart-Schalter ausblenden */
 #btnAuto{display:none!important}
-/* [Grok-Bot] V2.15: ein YouTube-Button beim laufenden Titel, Overlay mit 16:9-Embed */
-.now{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.now .now-title{flex:1;min-width:0}
-button.yt-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:5px 8px;min-height:36px;border-radius:6px;background:#5a1c1c;border:1px solid #8a3333;color:var(--text);text-decoration:none;font-size:.72rem;font-family:Georgia,serif;line-height:1;white-space:nowrap;touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}
+/* [Grok-Bot] V2.16: YouTube-Button neben „Offline“, Maße wie die Schalterzeile, rotes ▶-Icon */
+button.yt-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:4px 9px;min-height:28px;border-radius:7px;background:#5a1c1c;border:1px solid #8a3333;color:var(--text);font-size:.85rem;font-family:inherit;line-height:1;white-space:nowrap;touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}
 button.yt-link:hover{background:#7a2626}
+button.yt-link[hidden]{display:none}
 .yt-ico{display:inline-flex;align-items:center;justify-content:center;width:18px;height:13px;border-radius:3px;background:#e53935;flex:0 0 auto}
 .yt-ico::after{content:"";width:0;height:0;border-style:solid;border-width:4px 0 4px 6px;border-color:transparent transparent transparent #fff;margin-left:1px}
 #ytDlg{z-index:10000;align-items:center;justify-content:center}
@@ -155,7 +154,7 @@ button.yt-link:hover{background:#7a2626}
 </head>
 <body>
 <header>
-  <h1>Tadatmya Vedanta Player <span class="ver">V2.15</span></h1>
+  <h1>Tadatmya Vedanta Player <span class="ver">V2.16</span></h1>
   <h2>Sammlung der veröffentlichten Sonntags-Vorträge von Rishi Sahadev (<a href="https://t.me/+7qSv0wH6VkE0Njky" target="_blank" rel="noopener">Telegram</a>) und eine Auswahl verschiedener Satsangs von Swami Revatikaanta und Pandit Mayuran zu diesem wichtigen Thema</h2>
   <div class="meta" id="zeitraum">Zeitraum: 13.12.2025 – 25.10.2026</div>
   <div class="cover-gap" aria-hidden="true"></div>
@@ -282,7 +281,7 @@ button.yt-link:hover{background:#7a2626}
 <script src="list-marks.js?v=184"></script>
 <script src="resume-fix.js?v=167"></script>
 <script src="thumb-overlay.js?v=189"></script>
-<script src="yt-link.js?v=215"></script><!-- [Grok-Bot] V2.15 -->
+<script src="yt-link.js?v=216"></script><!-- [Grok-Bot] V2.16 -->
 <script src="vol-norm.js?v=177"></script>
 <script src="excerpt-format.js?v=185"></script>
 <script src="excerpt-tts.js?v=185"></script>

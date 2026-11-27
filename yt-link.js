@@ -1,10 +1,6 @@
-/* [Grok-Bot] V2.15: ein YouTube-Button beim laufenden Vortrag.
-   Öffnet ein Overlay mit eingebettetem Video (youtube-nocookie) an der aktuellen Stelle
-   (start=<Sekunden>). Audio wird dabei pausiert (userPaused, damit der Wächter nicht neu startet).
-   Beim Schließen: IFrame entfernen; wenn die YouTube-IFrame-API bereit ist, Audio an die
-   Videozeit setzen (nicht automatisch weiterlaufen). Offline oder wenn das IFrame in 8 s
-   nicht lädt: freundliche Meldung, Audio nicht bzw. nicht weiter pausiert.
-   IDs aus TV_THUMBS und TV_THUMBS_FILE. Kein Listen-Button. Kein Zeit-Offset (Dauern stimmen). */
+/* [Grok-Bot] V2.16: YouTube-Button neben „Offline“ in der Schalterzeile (nicht in der Titelleiste).
+   Verhalten unverändert: Overlay mit Embed an der aktuellen Stelle, Audio pausieren,
+   Offline-Meldung, ausblenden ohne ID oder ohne gewählten Vortrag. */
 (function(){
   var ytPlayer=null, loadTimer=0, pausedForYt=false;
 
@@ -179,29 +175,39 @@
       showOffline();
     }, 8000);
   }
-  function setNowLink(L){
-    const el=document.getElementById("now");
-    if(!el) return;
-    const title=(L && typeof labelOf==="function")?labelOf(L):(L?String(L.titel||""):"");
-    el.textContent="";
-    const t=document.createElement("span");
-    t.className="now-title";
-    t.textContent=title;
-    el.appendChild(t);
-    if(!ytId(L)) return;
-    const b=document.createElement("button");
-    b.type="button";
-    b.className="yt-link";
-    const lab="YouTube-Video an der aktuellen Stelle im Player öffnen";
-    b.title=lab;
-    b.setAttribute("aria-label",lab);
-    b.innerHTML='<span class="yt-ico" aria-hidden="true"></span><span class="yt-txt">YouTube</span>';
-    b.addEventListener("click", function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      openYt();
-    });
-    el.appendChild(b);
+  function ensureBtn(){
+    let b=document.getElementById("btnYt");
+    if(!b){
+      b=document.createElement("button");
+      b.type="button";
+      b.id="btnYt";
+      b.className="yt-link";
+      const lab="YouTube-Video an der aktuellen Stelle im Player öffnen";
+      b.title=lab;
+      b.setAttribute("aria-label",lab);
+      b.hidden=true;
+      b.innerHTML='<span class="yt-ico" aria-hidden="true"></span><span class="yt-txt">YouTube</span>';
+      b.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        openYt();
+      });
+    }
+    const off=document.getElementById("btnOffline");
+    if(off && off.parentNode){
+      if(b.previousElementSibling!==off) off.parentNode.insertBefore(b, off.nextSibling);
+    }else{
+      const vol=document.getElementById("btnVolNorm");
+      const row=vol&&vol.parentNode;
+      if(row && b.parentNode!==row) row.appendChild(b);
+    }
+    return b;
+  }
+  function syncYtBtn(){
+    const b=ensureBtn();
+    if(!b) return;
+    const L=currentLecture();
+    b.hidden=!ytId(L);
   }
 
   window.tvYtId=ytId;
@@ -211,10 +217,7 @@
   if(typeof origPlay==="function"){
     window.play=function(idx){
       const ret=origPlay.apply(this, arguments);
-      try{
-        const L=currentLecture();
-        if(L) setNowLink(L);
-      }catch(e){}
+      try{ syncYtBtn(); }catch(e){}
       return ret;
     };
   }
@@ -230,6 +233,21 @@
       if(e.key==="Escape" && dlg.classList.contains("on")){ e.preventDefault(); closeYt(); }
     });
   }
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", bindDlg);
-  else bindDlg();
+  function watchOfflineBtn(){
+    const vol=document.getElementById("btnVolNorm");
+    const row=vol&&vol.parentNode;
+    if(!row) return;
+    if(document.getElementById("btnOffline")){ syncYtBtn(); return; }
+    const obs=new MutationObserver(function(){
+      if(document.getElementById("btnOffline")){ obs.disconnect(); syncYtBtn(); }
+    });
+    obs.observe(row,{childList:true});
+  }
+  function init(){
+    bindDlg();
+    try{ syncYtBtn(); }catch(e){}
+    watchOfflineBtn();
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
 })();
