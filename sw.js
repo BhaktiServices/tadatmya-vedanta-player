@@ -1,3 +1,4 @@
+/* [Grok-Bot] V2.15 Cache v215 (YouTube-Overlay) */
 /* [Grok-Bot] V2.14 Cache v214 (YouTube-Link je Vortrag) */
 /* [Grok-Bot] V2.13 Cache v213 (Katalog-Pflege #42) */
 /* [Grok-Bot] V2.11 Cache v211 (Katalog-Pflege #41) */
@@ -18,7 +19,7 @@
 /* [Grok.com] V1.92 Cache */
 /* [Grok-Bot] V1.91 Cache */
 /* TV Player — shell only; never cache Dropbox audio; never serve HTML as JS */
-const CACHE="tv-player-v214"; /* [Grok-Bot] V2.14 */
+const CACHE="tv-player-v215"; /* [Grok-Bot] V2.15 */
 const AUDIO_CACHE="tvp-audio-v1"; /* [Grok-Bot] V2.00: offline gespeicherte Vorträge (offline.js) */
 const SHELL=[
   "./",
@@ -67,7 +68,7 @@ self.addEventListener("activate",function(e){
 });
 self.addEventListener("fetch",function(e){
   const url=new URL(e.request.url);
-  if(url.origin!==self.location.origin) return;
+  if(url.origin!==self.location.origin) return; /* [Grok-Bot] V2.15: YouTube und andere fremde Quellen nicht abfangen oder cachen */
   if(e.request.method!=="GET") return;
   e.respondWith(
     fetch(e.request).then(function(res){

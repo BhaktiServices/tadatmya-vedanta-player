@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Tadatmya Vedanta Player V2.14</title>
-<!-- [Grok-Bot] V2.14: YouTube-Link je Vortrag (yt-link.js; IDs aus thumbs.js / @yt) -->
+<title>Tadatmya Vedanta Player V2.15</title>
+<!-- [Grok-Bot] V2.15: ein YouTube-Button, Overlay mit Embed an der aktuellen Stelle, Offline-Hinweis -->
 <!-- [Grok-Bot] V2.12: Vortrag #41 (Katalog, lesungen.js, dlmap.js-IDs; kein texte/41.txt, Telegram-Begleittext fehlt) -->
 <!-- [Grok-Bot] V2.13: Katalog-Pflege #42 (Zeitraum, Titelbild) -->
 <!-- [Grok-Bot] V2.11: Katalog-Pflege #41 (Zeitraum, Titelbild) -->
@@ -128,26 +128,34 @@ button.item.active{background:#4a372b;color:var(--gold)}
 .bm-mark:hover{opacity:1}
 /* [Grok-Bot] V1.97: doppelten AutoStart-Schalter ausblenden */
 #btnAuto{display:none!important}
-/* [Grok-Bot] V2.14: YouTube-Link in der Liste und beim laufenden Titel */
+/* [Grok-Bot] V2.15: ein YouTube-Button beim laufenden Titel, Overlay mit 16:9-Embed */
 .now{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .now .now-title{flex:1;min-width:0}
-.item-wrap{position:relative;min-width:0;height:100%;display:flex}
-.item-wrap.has-yt > button.item{padding-right:5.4rem}
-a.yt-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:5px 8px;min-height:36px;border-radius:6px;background:#5a1c1c;border:1px solid #8a3333;color:var(--text);text-decoration:none;font-size:.72rem;font-family:Georgia,serif;line-height:1;white-space:nowrap;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-a.yt-link:hover{background:#7a2626}
-.item-wrap > a.yt-link{position:absolute;top:6px;right:6px;z-index:2}
+button.yt-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:5px 8px;min-height:36px;border-radius:6px;background:#5a1c1c;border:1px solid #8a3333;color:var(--text);text-decoration:none;font-size:.72rem;font-family:Georgia,serif;line-height:1;white-space:nowrap;touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}
+button.yt-link:hover{background:#7a2626}
 .yt-ico{display:inline-flex;align-items:center;justify-content:center;width:18px;height:13px;border-radius:3px;background:#e53935;flex:0 0 auto}
 .yt-ico::after{content:"";width:0;height:0;border-style:solid;border-width:4px 0 4px 6px;border-color:transparent transparent transparent #fff;margin-left:1px}
-@media (max-width:420px){
-  a.yt-link .yt-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-  a.yt-link{min-width:36px;padding:6px}
-  .item-wrap.has-yt > button.item{padding-right:3.2rem}
+#ytDlg{z-index:10000;align-items:center;justify-content:center}
+#ytDlg .yt-panel{background:var(--card);border:1px solid #6b5340;border-radius:12px;width:min(96vw,56rem);max-height:calc(100dvh - 16px);margin:auto;display:flex;flex-direction:column;pointer-events:auto;overflow:auto}
+#ytDlg .yt-panel .dlghead{flex-shrink:0}
+#ytDlgClose{min-width:44px;min-height:44px;font-size:1.7rem;line-height:1;padding:0 12px;flex:0 0 auto}
+.yt-frame-wrap{position:relative;width:100%;padding-top:56.25%;background:#000;flex:0 0 auto}
+.yt-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#ytOffline{display:none;margin:0;padding:22px 16px 10px;line-height:1.55;color:var(--text);font-size:1.02rem}
+#ytDlg.offline #ytOffline{display:block}
+#ytDlg.offline .yt-frame-wrap,#ytDlg.offline #ytExt{display:none}
+#ytExt{color:var(--gold);font-size:.85rem;padding:4px 0;min-height:36px;display:inline-flex;align-items:center;text-decoration:none}
+#ytExt:hover{text-decoration:underline}
+#ytDlg .dlgfoot{justify-content:flex-start}
+@media (max-width:700px){
+  #ytDlg{padding:8px 0 0}
+  #ytDlg .yt-panel{width:100%;max-width:none;border-radius:12px 12px 0 0;max-height:100dvh;min-height:0;margin-top:auto}
 }
 </style>
 </head>
 <body>
 <header>
-  <h1>Tadatmya Vedanta Player <span class="ver">V2.14</span></h1>
+  <h1>Tadatmya Vedanta Player <span class="ver">V2.15</span></h1>
   <h2>Sammlung der veröffentlichten Sonntags-Vorträge von Rishi Sahadev (<a href="https://t.me/+7qSv0wH6VkE0Njky" target="_blank" rel="noopener">Telegram</a>) und eine Auswahl verschiedener Satsangs von Swami Revatikaanta und Pandit Mayuran zu diesem wichtigen Thema</h2>
   <div class="meta" id="zeitraum">Zeitraum: 13.12.2025 – 25.10.2026</div>
   <div class="cover-gap" aria-hidden="true"></div>
@@ -194,6 +202,20 @@ a.yt-link:hover{background:#7a2626}
 </div>
 <div class="list" id="list"></div>
 <div id="thumbOv" aria-hidden="true"><img id="thumbOvImg" alt=""></div>
+<!-- [Grok-Bot] V2.15: YouTube-Overlay (Embed an der aktuellen Stelle, Offline-Hinweis) -->
+<div class="overlay" id="ytDlg" aria-hidden="true">
+  <div class="yt-panel" role="dialog" aria-modal="true" aria-labelledby="ytDlgTitle">
+    <div class="dlghead">
+      <h3 id="ytDlgTitle">YouTube</h3>
+      <button type="button" class="gold" id="ytDlgClose" aria-label="Schließen" title="Schließen">×</button>
+    </div>
+    <div class="yt-frame-wrap" id="ytFrameWrap"></div>
+    <p id="ytOffline" hidden>Keine Internetverbindung – das YouTube-Video ist nur online verfügbar. Das Audio kannst du offline weiter hören.</p>
+    <div class="dlgfoot">
+      <a class="yt-ext" id="ytExt" target="_blank" rel="noopener">in YouTube öffnen</a>
+    </div>
+  </div>
+</div>
 <div class="overlay" id="dlg">
   <div class="panel">
     <div class="dlghead"><h3 id="dlgT"></h3><button type="button" class="gold btnCloseTop" onclick="hideSum()">Schließen</button></div>
@@ -260,7 +282,7 @@ a.yt-link:hover{background:#7a2626}
 <script src="list-marks.js?v=184"></script>
 <script src="resume-fix.js?v=167"></script>
 <script src="thumb-overlay.js?v=189"></script>
-<script src="yt-link.js?v=214"></script><!-- [Grok-Bot] V2.14 -->
+<script src="yt-link.js?v=215"></script><!-- [Grok-Bot] V2.15 -->
 <script src="vol-norm.js?v=177"></script>
 <script src="excerpt-format.js?v=185"></script>
 <script src="excerpt-tts.js?v=185"></script>
